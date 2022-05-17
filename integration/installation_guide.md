@@ -18,8 +18,8 @@ To configure the integration with ((TODO: Your service name)), follow the steps 
 1. Select **Add Integration** (at the top of this page).
 1. Read the necessary access requirements and click **Continue**.
 1. Configure the integration using the following fields:
-    * ((TODO: Describe all configuration fields))
-    * ((TODO: Describe all secret fields))
+   * ((TODO: Describe all configuration fields))
+   * ((TODO: Describe all secret fields))
 1. Click **Create** to add the integration to your Library.
 1. Click the **Add to flow** link on the pop-up that appears.
 1. Drag the Action into the desired location in the flow.
