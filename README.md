@@ -20,7 +20,7 @@ This repo contains all the files required to create an integration that our mutu
 
 ### `configuration.json`
 
-This file defines environment secrets, variables(configuration), and dependencies for the Action execution runtime. When building your Action, use `events.secrets` for all values required from the customer through **secrets** and **configuration**.
+This file defines environment secrets, variables(configuration), and dependencies for the Action execution runtime. When building your Action, use `event.secrets` for all values required from the customer through **secrets** and **configuration**.
 
 This file has 3 main keys:
 - `secrets` - array of values that need encryption (API keys, signing keys, etc.).
@@ -32,15 +32,17 @@ This file has 3 main keys:
 - `label`: Required; the field label that will be used in the Auth0 dashboard.
 - `description`: Required; the field description that will be used in the Auth0 dashboard.
 - `default_value`: Optional; the default value to use.
+- `deploy_value`: Optional; the value to use when creating or updating an Action using the deploy scripts explained below
 - `options`: Optional; an array of option objects to use for a `configuration` select field:
     - `value`: Required; the value of the option if selected
     - `label`: Required; the text shown in the UI for this option
 
 **Dependencies**:
 - `name`: name of the package as listed on https://npmjs.com/
-- `version`: version of the package
+- `version`: pinned version of the package (no ranges)
 
-Here is an example `configuration.json` file
+Here is an example `configuration.json` file:
+
 ```json
 {
   "secrets": [
@@ -48,7 +50,8 @@ Here is an example `configuration.json` file
       "name": "ALL_CAPS_UNDERSCORE_SECRET",
       "label": "Field label that will be used in Auth0 Dashboard form",
       "description": "Field Description used in Auth0 Dashboard form",
-      "default_value": "optional default value to use"
+      "default_value": "optional default value to use",
+      "deploy_value": "optional deployment value to use"
     }
   ],
   "configuration": [
@@ -57,6 +60,7 @@ Here is an example `configuration.json` file
       "label": "Field label that will be used in Auth0 Dashboard form",
       "description": "Field Description used in Auth0 Dashboard form",
       "default_value": "optional default value to use",
+      "deploy_value": "optional deployment value to use",
       "options": [
         "value": "Optional array for a multi select of predefined values -- omit options for an input field",
         "label": "Text to show in multi select option field in Auth0 Dashboard"
@@ -66,7 +70,7 @@ Here is an example `configuration.json` file
   "dependencies": [ 
     {
       "name": "package-name",
-      "version": "latest" 
+      "version": "1.0.0" 
     }
   ]
 }
@@ -86,7 +90,9 @@ This is the [Jest](https://jestjs.io/docs/using-matchers) unit test suite that w
 
 ## Build and test your Action
 
-We've included a few helpful scripts in a `Makefile` that should help you build, test, and submit a quality integration. The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/). 
+We've included a few helpful scripts in a `Makefile` that should help you build, test, and submit a quality integration. You can develop your Action locally and use the commands below to lint, test, and deploy to a tenant.
+
+The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/). 
 
 * `make test` - this will run the spec file explained above, along with a few other integrity checks.
 * `make lint` - this will check and format your JS code according to our recommendations.
@@ -94,7 +100,7 @@ We've included a few helpful scripts in a `Makefile` that should help you build,
 * `make deploy_get_token` - use this command after `deploy_init` to generate an access token
 * `make deploy_create` - use this command to create a new Action based on the current integration files. If this successfully completes, you will see a URL in your terminal that will allow you to deploy and add the Action to a flow
 * `make deploy_update` - use this command to update the created Action based on the current integration files.
-* `make deploy_delete` - use this command to destoy the Action.
+* `make deploy_delete` - use this command to remove the Action from your tenant completely.
 
 ## Add documentation
 
