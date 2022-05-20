@@ -94,8 +94,8 @@ We've included a few helpful scripts in a `Makefile` that should help you build,
 
 The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/). 
 
-* `make test` - this will run the spec file explained above, along with a few other integrity checks.
-* `make lint` - this will check and format your JS code according to our recommendations.
+* `make test` - this will run the Jest spec file explained above, along with a few other integrity checks. This check is run in a GitHub Action located in `.github/workflows/test.yaml`.
+* `make lint` - this will check and format your JS code according to our recommendations. This check is run in a GitHub Action located in `.github/workflows/lint.yaml`.
 * `make deploy_init` - use this command to initialize deployments to a test tenant. You will need to [create a machine-to-machine application](https://auth0.com/docs/get-started/auth0-overview/create-applications/machine-to-machine-apps) authorized for the Management API with permissions `read:actions`, `update:actions`, `delete:actions`, and `create:actions`.
 * `make deploy_get_token` - use this command after `deploy_init` to generate an access token
 * `make deploy_create` - use this command to create a new Action based on the current integration files. If this successfully completes, you will see a URL in your terminal that will allow you to deploy and add the Action to a flow

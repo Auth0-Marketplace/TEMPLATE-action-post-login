@@ -24,4 +24,4 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Run integration tests
-        run: docker run -v $(pwd)/integration/:/data/integration/ auth0josh/auth0-integration-testing npm run integration:test
+        run: docker run -v $(pwd)/integration/:/data/integration/ auth0josh/auth0-integration-testing npm run test:action

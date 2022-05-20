@@ -1,19 +1,19 @@
-const { eventMock } = require("../__mocks__/event-post-login");
+const { makeEventMock } = require("../__mocks__/event-post-login");
 const { apiMock } = require("../__mocks__/api-post-login");
 
 const { onExecutePostLogin } = require("./integration.action");
 
 describe("Action integration", () => {
-  let consoleLogMock;
+  let consoleLogMock, eventMock;
 
   beforeEach(() => {
     consoleLogMock = jest.spyOn(console, "log").mockImplementation();
+    eventMock = makeEventMock();
   });
 
   afterEach(() => {
     consoleLogMock.mockRestore();
     jest.clearAllMocks();
-    eventMock.secrets = {};
   });
 
   describe("onExecutePostLogin", () => {
