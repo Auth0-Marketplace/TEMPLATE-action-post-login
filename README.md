@@ -78,7 +78,7 @@ Here is an example `configuration.json` file:
 
 ### `installation_guide.md`
 
-This is the Markdown-formatted instructions that tenant admins will use to install and configure your Action. This file has a number of `TODO` items that indicate what needs to be added. Your guide should retain the same format and general Auth0 installation steps.
+This file contains the Markdown-formatted instructions that tenant admins will use to install and configure your integration. This file has a number of `TODO` items that indicate what needs to be added. Your guide should retain the same general format and provided Auth0 installation steps.
 
 ### `integration.action.js`
 
@@ -101,10 +101,6 @@ The commands below require Docker to be installed and running on your local mach
 * `make deploy_create` - use this command to create a new Action based on the current integration files. If this successfully completes, you will see a URL in your terminal that will allow you to deploy and add the Action to a flow
 * `make deploy_update` - use this command to update the created Action based on the current integration files.
 * `make deploy_delete` - use this command to remove the Action from your tenant completely.
-
-## Add documentation
-
-The `README.md` file in the `integration` directory is provided as a template for your installation guide. Look for `TODO:` items to determine what needs to be filled out. 
 
 ## Submit for review
 
