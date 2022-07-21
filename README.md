@@ -13,6 +13,7 @@ This template is used to create Action Integrations in the Login flow. The Login
 ## Getting started
 
 This repo contains all the files required to create an integration that our mutual customers can install. In the `integration` folder you'll find the following files:
+
 - [configuration.json](#configurationjson)
 - [installation_guide.md](#installationguidemd)
 - [integration.action.js](#integrationactionjs)
@@ -20,50 +21,43 @@ This repo contains all the files required to create an integration that our mutu
 
 ### `configuration.json`
 
-This file defines environment secrets, variables(configuration), and dependencies for the Action execution runtime. When building your Action, use `event.secrets` for all values required from the customer through **secrets** and **configuration**.
+This file defines secrets (values are encrypted at rest), configuration (values can be seen and edited), and dependencies used when the Action code is run during a flow.
 
-This file has 3 main keys:
+This file expects 3 keys, any of which can be an empty array:
+
 - `secrets` - array of values that need encryption (API keys, signing keys, etc.).
-- `configuration` - array of values that are stored and edited in plain text  (URLs, labels, etc.).
-- `dependencies` - Node.js dependencies used in the Action execution runtime
+- `configuration` - array of values that are stored and edited in plain text (URLs, labels, etc.).
+- `dependencies` - Node.js dependencies used during runtime
 
-**Secrets** and **Configuration**:
-- `name`: Required; the name used in the code. This value should be `ALL_CAPS_UNDERSCORE`.
-- `label`: Required; the field label that will be used in the Auth0 dashboard.
-- `description`: Required; the field description that will be used in the Auth0 dashboard.
-- `default_value`: Optional; the default value to use.
-- `deploy_value`: Optional; the value to use when creating or updating an Action using the deploy scripts explained below
-- `options`: Optional; an array of option objects to use for a `configuration` select field:
-    - `value`: Required; the value of the option if selected
-    - `label`: Required; the text shown in the UI for this option
-
-**Dependencies**:
-- `name`: name of the package as listed on https://npmjs.com/
-- `version`: pinned version of the package (no ranges)
-
-Here is an example `configuration.json` file:
+Here is a valid example `configuration.json` file. Details are explained below
 
 ```json
 {
   "secrets": [
     {
       "name": "ALL_CAPS_UNDERSCORE_SECRET",
-      "label": "Field label that will be used in Auth0 Dashboard form",
-      "description": "Field Description used in Auth0 Dashboard form",
+      "label": "Field Label",
+      "description": "Field description",
       "default_value": "optional default value to use",
       "deploy_value": "optional deployment value to use"
     }
   ],
   "configuration": [
     {
-      "name": "ALL_CAPS_UNDERSCORE",
-      "label": "Field label that will be used in Auth0 Dashboard form",
-      "description": "Field Description used in Auth0 Dashboard form",
+      "name": "ALL_CAPS_UNDERSCORE_CONFIG",
+      "label": "Field Label",
+      "description": "Field description",
       "default_value": "optional default value to use",
       "deploy_value": "optional deployment value to use",
       "options": [
-        "value": "Optional array for a multi select of predefined values -- omit options for an input field",
-        "label": "Text to show in multi select option field in Auth0 Dashboard"
+        {
+          "value": "option_1_value",
+          "label": "Option 1 Label"
+        },
+        {
+          "value": "option_2_value",
+          "label": "Option 2 Label"
+        }
       ]
     }
   ],
@@ -75,6 +69,28 @@ Here is an example `configuration.json` file:
   ]
 }
 ```
+
+#### Secrets and Configuration
+
+**Note:** If you are building and testing your Action directly in the dashboard, you will need to add all configuration as secrets and use `event.secrets` in your code before saving the Action. If you use our [deployment tools](#build-and-test-your-integration), you can use `event.configuration` in your code and this substitution will be done automatically during deployment.
+
+These are arrays of objects with the following shape:
+
+- `name`: Required; the name used in the code. This value should be `ALL_CAPS_UNDERSCORE`.
+- `label`: Required; the field label that will be used in the Auth0 dashboard.
+- `description`: Required; the field description that will be used in the Auth0 dashboard.
+- `default_value`: Optional; the default value to use when the Action is first installed.
+- `deploy_value`: Optional; the value to use when creating or updating an Action using the deploy scripts explained below
+- `options`: Optional; an array of option objects to use for a `configuration` select field:
+    - `value`: Required; the value of the option if selected
+    - `label`: Required; the text shown in the UI for this option
+
+#### Dependencies
+
+This should be an array of objects with the following shape:
+
+- `name`: name of the package as listed on https://npmjs.com/
+- `version`: pinned version of the package (no ranges)
 
 ### `installation_guide.md`
 
@@ -88,7 +104,7 @@ This is the code that will run on a customer's tenant on all logins. See the [Lo
 
 This is the [Jest](https://jestjs.io/docs/using-matchers) unit test suite that will run against your completed Action code. Add tests for success and failure paths.
 
-## Build and test your Action
+## Build and test your integration
 
 We've included a few helpful scripts in a `Makefile` that should help you build, test, and submit a quality integration. You can develop your Action locally and use the commands below to lint, test, and deploy to a tenant.
 
@@ -106,6 +122,7 @@ The commands below require Docker to be installed and running on your local mach
 
 When your integration has been written and tested, it's time to submit it for review.
 
+1. Change `event.secrets` to `event.configuration` for all applicable keys (see above)
 1. Replace the `media/256x256-logo.png` file with an image of the same size and format (256 pixel square on a transparent background)
 1. If you provided value-proposition columns and would like to include images, replace the `media/460x260-column-*.png` files with images of the same size and format; otherwise, delete these images before submitting
 1. Run `make zip` in the root of the integration package and upload the resulting archive to the Jira ticket.
