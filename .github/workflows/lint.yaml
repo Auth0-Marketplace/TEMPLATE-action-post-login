@@ -24,4 +24,4 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Run integration linting
-        run: docker run -v $(pwd)/integration/:/data/integration/ auth0josh/auth0-integration-testing npm run integration:lint
+        run: docker run -v $(pwd)/integration/:/data/integration/ auth0/marketplace-integration-tools npm run integration:lint
