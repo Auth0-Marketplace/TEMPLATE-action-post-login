@@ -61,10 +61,10 @@ Here is a valid example `configuration.json` file. Details are explained below
       ]
     }
   ],
-  "dependencies": [ 
+  "dependencies": [
     {
       "name": "package-name",
-      "version": "1.0.0" 
+      "version": "1.0.0"
     }
   ]
 }
@@ -82,8 +82,8 @@ These are arrays of objects with the following shape:
 - `default_value`: Optional; the default value to use when the Action is first installed.
 - `deploy_value`: Optional; the value to use when creating or updating an Action using the deploy scripts explained below
 - `options`: Optional; an array of option objects to use for a `configuration` select field:
-    - `value`: Required; the value of the option if selected
-    - `label`: Required; the text shown in the UI for this option
+  - `value`: Required; the value of the option if selected
+  - `label`: Required; the text shown in the UI for this option
 
 #### Dependencies
 
@@ -108,15 +108,15 @@ This is the [Jest](https://jestjs.io/docs/using-matchers) unit test suite that w
 
 We've included a few helpful scripts in a `Makefile` that should help you build, test, and submit a quality integration. You can develop your Action locally and use the commands below to lint, test, and deploy to a tenant.
 
-The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/). 
+The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/).
 
-* `make test` - this will run the Jest spec file explained above, along with a few other integrity checks. This check is run in a GitHub Action located in `.github/workflows/test.yaml`.
-* `make lint` - this will check and format your JS code according to our recommendations. This check is run in a GitHub Action located in `.github/workflows/lint.yaml`.
-* `make deploy_init` - use this command to initialize deployments to a test tenant. You will need to [create a machine-to-machine application](https://auth0.com/docs/get-started/auth0-overview/create-applications/machine-to-machine-apps) authorized for the Management API with permissions `read:actions`, `update:actions`, `delete:actions`, and `create:actions`.
-* `make deploy_get_token` - use this command after `deploy_init` to generate an access token
-* `make deploy_create` - use this command to create a new Action based on the current integration files. If this successfully completes, you will see a URL in your terminal that will allow you to deploy and add the Action to a flow
-* `make deploy_update` - use this command to update the created Action based on the current integration files.
-* `make deploy_delete` - use this command to remove the Action from your tenant completely.
+- `make test` - this will run the Jest spec file explained above, along with a few other integrity checks. This check is run in a GitHub Action located in `.github/workflows/test.yaml`.
+- `make lint` - this will check and format your JS code according to our recommendations. This check is run in a GitHub Action located in `.github/workflows/lint.yaml`.
+- `make deploy_init` - use this command to initialize deployments to a test tenant. You will need to [create a machine-to-machine application](https://auth0.com/docs/get-started/auth0-overview/create-applications/machine-to-machine-apps) authorized for the Management API with permissions `read:actions`, `update:actions`, `delete:actions`, and `create:actions`.
+- `make deploy_get_token` - use this command after `deploy_init` to generate an access token
+- `make deploy_create` - use this command to create a new Action based on the current integration files. If this successfully completes, you will see a URL in your terminal that will allow you to deploy and add the Action to a flow
+- `make deploy_update` - use this command to update the created Action based on the current integration files.
+- `make deploy_delete` - use this command to remove the Action from your tenant completely.
 
 ## Submit for review
 
@@ -133,12 +133,12 @@ If you have any questions or problems with this, please reply back on the suppor
 
 Auth0 helps you to:
 
-* Add authentication with [multiple authentication sources](https://auth0.com/docs/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
-* Add authentication through more traditional [username/password databases](https://auth0.com/docs/connections/database/custom-db).
-* Add support for [linking different user accounts](https://auth0.com/docs/link-accounts) with the same user.
-* Support for generating signed [JSON Web Tokens](https://auth0.com/docs/jwt) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when, and where users are logging in.
-* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://auth0.com/docs/rules/current).
+- Add authentication with [multiple authentication sources](https://auth0.com/docs/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+- Add authentication through more traditional [username/password databases](https://auth0.com/docs/connections/database/custom-db).
+- Add support for [linking different user accounts](https://auth0.com/docs/link-accounts) with the same user.
+- Support for generating signed [JSON Web Tokens](https://auth0.com/docs/jwt) to call your APIs and **flow the user identity** securely.
+- Analytics of how, when, and where users are logging in.
+- Pull data from other sources and add it to the user profile, through [JavaScript rules](https://auth0.com/docs/rules/current).
 
 ## Issue Reporting
 
