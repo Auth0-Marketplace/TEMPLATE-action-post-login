@@ -104,11 +104,13 @@ This is the code that will run on a customer's tenant on all logins. See the [Lo
 
 This is the [Jest](https://jestjs.io/docs/using-matchers) unit test suite that will run against your completed Action code. Add tests for success and failure paths.
 
-## Build and test your integration
+## Recommended Testing
 
-We've included a few helpful scripts in a `Makefile` that should help you build, test, and submit a quality integration. You can develop your Action locally and use the commands below to lint, test, and deploy to a tenant.
+Before submitting your integration, it's crucial to ensure that it's built and tested thoroughly. We've provided a set of scripts in the Makefile to assist you in this process. These scripts will help you build, test, and deploy a high-quality integration. It's recommended to develop your Action locally and utilize the commands below for linting, testing, and deployment.
 
 The commands below require Docker to be installed and running on your local machine (though no direct Docker experience is necessary). Download and install Docker [using these steps for your operating system](https://docs.docker.com/get-docker/). 
+
+**Please note:** When you run the tests, they are executed against the **Current Active LTS of Node.js**.
 
 * `make test` - this will run the Jest spec file explained above, along with a few other integrity checks. This check is run in a GitHub Action located in `.github/workflows/test.yaml`.
 * `make lint` - this will check and format your JS code according to our recommendations. This check is run in a GitHub Action located in `.github/workflows/lint.yaml`.
